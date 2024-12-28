@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
+import ImageGallery from './components/ImageGallery/ImageGallery';
 import { fetchImages } from './http-api';
 import './App.css';
 
@@ -40,13 +41,9 @@ const App = () => {
     <div>
       <SearchBar onSubmit={handleSearchSubmit} />
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
-        {images.map(image => (
-          <li key={image.id}>
-            <img src={image.urls.small} alt={image.alt_description} />
-          </li>
-        ))}
-      </ul>
+
+      <ImageGallery images={images} />
+
       {isLoading && <p>Loading...</p>}
       {images.length > 0 && !isLoading && (
         <button onClick={() => setPage(prevPage => prevPage + 1)}>
