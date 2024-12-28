@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
+import Loader from './components/Loader/Loader';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage';
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import { fetchImages } from './http-api';
 import './App.css';
 
@@ -37,18 +40,18 @@ const App = () => {
     setPage(1);
   };
 
+  const handleLoadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
   return (
-    <div>
+    <div className="App">
       <SearchBar onSubmit={handleSearchSubmit} />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      <ImageGallery images={images} />
-
-      {isLoading && <p>Loading...</p>}
+      {error && <ErrorMessage message={error} />}
+      {images.length > 0 && <ImageGallery images={images} />}
+      {isLoading && <Loader />}
       {images.length > 0 && !isLoading && (
-        <button onClick={() => setPage(prevPage => prevPage + 1)}>
-          Load More
-        </button>
+        <LoadMoreBtn onClick={handleLoadMore} />
       )}
     </div>
   );
