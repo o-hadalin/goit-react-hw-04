@@ -5,3 +5,7 @@
   text-align: center;
   position: relative;
 }
+
+.no-scroll {
+  overflow: hidden;
+}

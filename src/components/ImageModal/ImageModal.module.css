@@ -12,20 +12,20 @@
 }
 
 .overlay {
-  position: absolute;
+  position: fixed; /* Fixed, щоб перекривало весь екран */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 90;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .modal {
-  position: relative;
+  position: absolute; /* Абсолютне позиціонування для центрування */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрування модального вікна */
   width: 85vw;
   height: 85vh;
   background-color: #333;
