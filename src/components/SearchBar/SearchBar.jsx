@@ -28,6 +28,8 @@ const SearchBar = ({ onSubmit }) => {
           <HiOutlineSearch className={styles.icon} onClick={handleSubmit} />
           <input
             type="text"
+            id="search-input"
+            name="search"
             className={styles.input}
             value={query}
             onChange={handleInputChange}
