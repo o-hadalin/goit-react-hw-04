@@ -1,9 +1,9 @@
-.modal {
-  position: absolute;
+.ReactModalPortal {
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: rgb(97, 97, 97);
   padding: 20px;
   border-radius: 8px;
   max-width: 90%;

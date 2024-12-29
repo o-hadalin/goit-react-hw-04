@@ -24,6 +24,7 @@ const ImageModal = ({ isOpen, onClose, imageUrl, imageAlt }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
+      shouldCloseOnOverlayClick={true}
       className="modal"
       overlayClassName="overlay"
     >

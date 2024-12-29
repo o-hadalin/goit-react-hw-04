@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { HiOutlineSearch } from 'react-icons/hi';
 import styles from './SearchBar.module.css';
 
 const SearchBar = ({ onSubmit }) => {
@@ -23,18 +24,18 @@ const SearchBar = ({ onSubmit }) => {
   return (
     <header className={styles.header}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className={styles.input}
-          value={query}
-          onChange={handleInputChange}
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-        />
-        <button type="submit" className={styles.button}>
-          Search
-        </button>
+        <div className={styles.inputWrapper}>
+          <HiOutlineSearch className={styles.icon} onClick={handleSubmit} />
+          <input
+            type="text"
+            className={styles.input}
+            value={query}
+            onChange={handleInputChange}
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+          />
+        </div>
       </form>
     </header>
   );
