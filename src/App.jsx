@@ -44,6 +44,14 @@ const App = () => {
     getImages();
   }, [searchQuery, page]);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.getElementById('root').setAttribute('inert', 'true');
+    } else {
+      document.getElementById('root').removeAttribute('inert');
+    }
+  }, [isModalOpen]);
+
   const handleSearchSubmit = query => {
     setSearchQuery(query);
     setImages([]);

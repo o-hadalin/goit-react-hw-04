@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import Modal from 'react-modal';
-import PropTypes from 'prop-types';
-import './ImageModal.module.css';
-
 Modal.setAppElement('#root');
+import PropTypes from 'prop-types';
+import styles from './ImageModal.module.css';
 
 const ImageModal = ({ isOpen, onClose, imageUrl, imageAlt }) => {
   useEffect(() => {
@@ -25,10 +24,10 @@ const ImageModal = ({ isOpen, onClose, imageUrl, imageAlt }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={true}
-      className="modal"
-      overlayClassName="overlay"
+      className={styles.modal}
+      overlayClassName={styles.overlay}
     >
-      <div className="modal-content">
+      <div className={styles.modalContent}>
         <img src={imageUrl} alt={imageAlt} />
       </div>
     </Modal>
