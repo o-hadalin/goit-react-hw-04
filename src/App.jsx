@@ -17,6 +17,7 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState({ url: '', alt: '' });
   const [totalPages, setTotalPages] = useState(0);
+  const [noImagesFound, setNoImagesFound] = useState(false);
 
   useEffect(() => {
     if (!searchQuery) return;
@@ -24,11 +25,15 @@ const App = () => {
     const getImages = async () => {
       setIsLoading(true);
       setError(null);
+      setNoImagesFound(false);
 
       try {
         const data = await fetchImages(searchQuery, page);
+        if (data.results.length === 0) {
+          setNoImagesFound(true);
+        }
         setImages(prevImages => [...prevImages, ...data.results]);
-        setTotalPages(data.total_pages); // Set total pages from API response
+        setTotalPages(data.total_pages);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -43,10 +48,18 @@ const App = () => {
     setSearchQuery(query);
     setImages([]);
     setPage(1);
+    setNoImagesFound(false);
   };
 
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
+
+    setTimeout(() => {
+      window.scrollBy({
+        top: 200,
+        behavior: 'smooth',
+      });
+    }, 300);
   };
 
   const openModal = (imageUrl, imageAlt) => {
@@ -58,12 +71,15 @@ const App = () => {
     setIsModalOpen(false);
   };
 
-  const hasMoreImages = page < totalPages; // Determine if there are more pages
+  const hasMoreImages = page < totalPages;
 
   return (
     <div className="App">
       <SearchBar onSubmit={handleSearchSubmit} />
       {error && <ErrorMessage message={error} />}
+      {noImagesFound && (
+        <p>No images found for {searchQuery}. Please try another search.</p>
+      )}
       {images.length > 0 && (
         <ImageGallery images={images} onImageClick={openModal} />
       )}
